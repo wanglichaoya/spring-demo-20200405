@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+    <!-- 1、通过构造器 把 容器中的 bean 注入到 PersonModel bean 中-->
+    <bean id="menuModel" class="com.javacode.demo04.MenuModel"></bean>
+    <bean id="diBeanByConstructor" class="com.javacode.demo04.PersonModel">
+        <!-- ref 引入容器中其他的bean-->
+       <constructor-arg name="menuModel" ref="menuModel"></constructor-arg>
+
+        <!--内置bean的方式注入-->
+        <constructor-arg name="userModel">
+            <bean class="com.javacode.demo04.UserModel">
+                <constructor-arg name="name" value="宾利"/>
+                <constructor-arg name="desc" value="36"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+
+    <!-- 2、通过setter 把 容器中的 bean 注入到 PersonModel bean 中-->
+    <bean id="diBeanBySetter" class="com.javacode.demo04.PersonModel">
+        <property name="menuModel" ref="menuModel"></property>
+        <property name="userModel">
+            <bean class="com.javacode.demo04.UserModel">
+                <constructor-arg index="0" value="张兵"></constructor-arg>
+                <constructor-arg index="1" value="20"></constructor-arg>
+            </bean>
+        </property>
+    </bean>
+</beans>

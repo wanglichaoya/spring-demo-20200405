@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+    <!--
+       定义一个bean
+       id：bean的唯一标识，可以通过这个标识从容器中获取这个bean对象
+       clss：这个bean的类型，完整类名称
+       -->
+    <bean id="helloWorld" class="com.javacode.demo01.HelloWorld"/>
+
+    <!--   1、通过UserMode 的默认构造方法创建UserModel对象      -->
+    <bean id="createBeanByConstructor1" class="com.javacode.demo02.UserModel"></bean>
+
+    <bean id="createBeanByConstructor2" class="com.javacode.demo02.UserModel">
+        <constructor-arg index="0" value="我是通过UserModel的有参方法构造的对象!"></constructor-arg>
+        <constructor-arg index="1" value="20"></constructor-arg>
+    </bean>
+
+
+    <!--     2、通过静态工厂方法来创建bean    -->
+    <!--
+    spring容器启动的时候会自动调用UserStaticFactory中的buildUser1
+    静态方法获取UserModel对象，将其作为createBeanByStaticFactoryMethod1名称对应的bean对象
+    放在spring容器中。
+    -->
+    <bean id="createBeanByStaticFactoryMethod1" class="com.javacode.demo02.UserStaticFactory"
+          factory-method="buildUser1"></bean>
+    <!--
+     会调用UserStaticFactory的buildUser2方法，并且会传入2个指定的参数，
+     得到返回的UserModel对象，将其作为createBeanByStaticFactoryMethod2名称对应的
+     bean对象放在spring容器中。
+    -->
+    <bean id="createBeanByStaticFactoryMethod2" class="com.javacode.demo02.UserStaticFactory"
+          factory-method="buildUser2">
+        <constructor-arg index="0" value="张三的歌"></constructor-arg>
+        <constructor-arg index="1" value="35"></constructor-arg>
+
+    </bean>
+
+    <!--  3、通过实例工厂方法创建bean 对象-->
+    <!--让Spring容器调用某些对象的某些实例方法来生成bean对象，然后放到Spring容器中供使用-->
+    <!--步骤1、定义一个工厂实例-->
+    <bean id="UserFactory" class="com.javacode.demo02.UserFactory"></bean>
+    <!--步骤2、使用工厂对象，调用工厂对象的实例方法来生成bean对象-->
+    <bean id="createBeanByBeanMethod1" factory-bean="UserFactory" factory-method="buildUser1"></bean>
+    <bean id="createBeanByBeanMethod2" factory-bean="UserFactory" factory-method="buildUser2">
+        <constructor-arg index="0" value="李斯"></constructor-arg>
+        <constructor-arg index="1" value="30"></constructor-arg>
+    </bean>
+
+    <!--  4、通过FactoryBean来创建bean对象-->
+    <bean id="createByFactoryBean" class="com.javacode.demo02.UserFactoryBean"></bean>
+</beans>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+
+    <!--Spring 的依赖注入有2种方式，1、构造器注入  2、set方式注入
+       其中，构造器注入又有 3种，
+                1、构造器参数索引注入
+                2、构造器参数类型注入
+                3、构造器参数名称注入
+    -->
+    <!-- 1、通过构造器参数的索引注入-->
+    <bean id="diByConstructorParamIndex" class="com.javacode.demo04.UserModel">
+        <constructor-arg index="0" value="王立朝"></constructor-arg>
+        <constructor-arg index="1" value="现居住在河南安阳"></constructor-arg>
+    </bean>
+
+    <!--  2、通过构造器参数类型注入-->
+    <bean id="diByConstructorParamType" class="com.javacode.demo04.UserModel">
+        <constructor-arg type="java.lang.String" value="小明"></constructor-arg>
+        <constructor-arg type="java.lang.String" value="家住在上海"></constructor-arg>
+    </bean>
+
+    <!-- 3、通过构造器 参数名称注入-->
+    <bean id="diByConstructorParamName" class="com.javacode.demo04.UserModel">
+        <constructor-arg name="name" value="小红"></constructor-arg>
+        <constructor-arg name="desc" value="家住广州"></constructor-arg>
+    </bean>
+
+    <!--set方式注入-->
+    <!--
+    通常情况下，我们的类都是标准的javabean，javabean类的特点：
+          属性都是private访问级别的
+          属性通常情况下通过一组setter（修改器）和getter（访问器）方法来访问
+           setter方法，以set开头，后跟首字母大写的属性名，如：setUserName，
+           简单属性一般只有一个方法参数，方法返回值通常为void;
+          getter方法，一般属性以get开头，对于boolean类型一般以is开头，后跟首字母大写的属性名，
+          如：getUserName，isOk；
+       spring对符合javabean特点类，提供了setter方式的注入，
+            会调用对应属性的setter方法将被依赖的对象注入进去。
+    -->
+
+
+</beans>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+
+    <bean id="diOtherType" class="com.javacode.demo04.DiOtherTypeModel">
+        <!--注入  java.util.List 对象-->
+        <property name="list1">
+            <list>
+                <value>注入 java.util.List 对象--Spring</value>
+                <value>注入 java.util.List 对象--Java</value>
+            </list>
+        </property>
+        <!--注入  java.util.Set 对象-->
+        <property name="userModelSet">
+            <set>
+               <bean id="userModel" class="com.javacode.demo04.UserModel">
+                   <!--构造器注入-->
+                  <constructor-arg name="name" value="zhangsna"></constructor-arg>
+                  <constructor-arg name="age" value="20"></constructor-arg>
+                  <constructor-arg name="desc" value="描述"></constructor-arg>
+               </bean>
+            </set>
+        </property>
+
+        <!-- 注入java.util.Map对象 -->
+        <property name="map1">
+            <map>
+                <entry key="路人甲Java" value="30"/>
+                <entry key="路人" value="28"/>
+            </map>
+        </property>
+
+        <!-- 注入数组对象 -->
+        <property name="array1">
+            <array>
+                <value>10</value>
+                <value>9</value>
+                <value>8</value>
+            </array>
+        </property>
+
+        <!-- 注入java.util.Properties对象 -->
+        <property name="properties">
+            <props>
+                <prop key="key1">java高并发系列</prop>
+                <prop key="key2">mybatis系列</prop>
+                <prop key="key3">mysql系列</prop>
+            </props>
+        </property>
+
+    </bean>
+</beans>
